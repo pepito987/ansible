@@ -1,0 +1,5 @@
+ansible==2.3.1.0
+boto==2.46.1
+boto3==1.4.4
+awscli==1.11.55
+awsmfa==0.2.7

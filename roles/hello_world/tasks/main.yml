@@ -1,0 +1,3 @@
+---
+- include: "{{ hello_world_mode }}/_includes.yml"
+  static: yes

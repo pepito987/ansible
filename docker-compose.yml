@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  with:
+    container_name: ansible-runner
+    image: ansible-runner-img
+    build: .
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ${HOME}/.aws:/root/.aws
+    tty: true
