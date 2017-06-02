@@ -1,16 +1,7 @@
 ---
-- name: Destroy Internet Gateway
-  ec2_vpc_igw:
-    vpc_id: vpc-de3c81b7
-    state: "absent"
-
 - name: Destroy VPC
   ec2_vpc_net:
     name: "{{ vpc_name_r }}"
     cidr_block: "{{ vpc_cidr_r }}"
     region: "{{ vpc_region_r }}"
     state: "absent"
-
-- name: debug
-  debug:
-    msg: "asdf {{ vpc_cidr_r }}"
