@@ -1,7 +1,7 @@
-.PHONY : all provision
+.PHONY : all provision destroy
 
 all:
-	$(error Usage: make <provision>)
+	$(error Usage: make <provision, destroy >)
 
 docker-check:
 	@if docker info > /dev/null; then \
@@ -19,5 +19,11 @@ docker-check:
 provivion: docker-check .dockerignore
 	docker-compose run --rm with make ansible-provision
 
+destroy: docker-check .dockerignore
+	docker-compose run --rm with make ansible-destroy
+
 ansible-provision:
 	ansible-playbook playbooks/provision-playbook.yml -v
+
+ansible-destroy:
+	ansible-playbook playbooks/destroy-playbook.yml -v
