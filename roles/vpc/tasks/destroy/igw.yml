@@ -1,0 +1,5 @@
+---
+- name: Destroy Internet Gateway
+  ec2_vpc_igw:
+    vpc_id: "{{ common_vpc_id }}"
+    state: "absent"

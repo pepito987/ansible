@@ -1,0 +1,9 @@
+---
+dependencies:
+  #Destroy
+  - {
+      role: common,
+      common_mode_r: fetch,
+      fetch: vpc,
+      when: "vpc_mode_r == 'destroy'"
+    }

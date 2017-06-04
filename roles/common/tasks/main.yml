@@ -1,0 +1,5 @@
+---
+- include_vars: ../vars/vpc.yml
+
+- include: "{{ common_mode_r }}/{{ fetch }}.yml"
+  static: yes

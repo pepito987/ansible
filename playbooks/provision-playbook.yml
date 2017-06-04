@@ -12,5 +12,6 @@
         vpc_mode_r: create,
         vpc_name_r: "{{ vpc_name }}",
         vpc_cidr_r: "{{ vpc_cidr }}",
-        vpc_region_r: "{{ vpc_region }}"
+        vpc_region_r: "{{ vpc_region }}",
+        vpc_igw_tag_name_r: "{{ vpc_name }}"
       }
