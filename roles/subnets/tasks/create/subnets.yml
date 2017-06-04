@@ -1,0 +1,10 @@
+---
+- name: Create Subnets
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ common_vpc_id }}"
+    az: "{{ item.az }}"
+    cidr: "{{ item.cidr }}"
+    resource_tags:
+      Name: "{{ item.name }}"
+  with_items: "{{ subnets_r }}"

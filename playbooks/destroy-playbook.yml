@@ -6,8 +6,16 @@
   gather_facts: no
   vars_files:
     - ../vars/common/vpc.yml
+    - ../vars/common/subnets.yml
 
   roles:
+    - {
+        role: subnets,
+        subnets_mode_r: destroy,
+        subnets_vpc_name_r: "{{ vpc_name }}",
+        subnets_cidr_r: "{{ vpc_cidr }}",
+        subnets_r: "{{ subnets }}"
+      }
     - {
         role: vpc,
         vpc_mode_r: destroy,

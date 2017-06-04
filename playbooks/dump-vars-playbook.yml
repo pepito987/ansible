@@ -5,6 +5,7 @@
   gather_facts: no
   vars_files:
     - ../vars/common/vpc.yml
+    - ../vars/common/subnets.yml
 
   roles:
     - role: dump_vars

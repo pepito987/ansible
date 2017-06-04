@@ -1,0 +1,8 @@
+dependencies:
+  #Destroy & Create
+  - {
+      role: common,
+      common_mode_r: fetch,
+      fetch: vpc,
+      common_vpc_name_r: "{{ subnets_vpc_name_r }}",
+    }
