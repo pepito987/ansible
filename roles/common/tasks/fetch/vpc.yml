@@ -1,10 +1,11 @@
 ---
 - name: Fetch VPC ID
-  shell:  aws ec2 describe-vpcs --output json --filters {{ common_vpc_id_filters }} --query {{ common_vpc_id_query }}
-  register: fetch_vpc_id
-  no_log: true
-  changed_when: false
+  ec2_vpc_net_facts:
+    filters:
+      "tag:Name": "{{ common_vpc_name_r }}"
+      state: "available"
+  register: fetch_vpcs_id
 
 - name: Set VPC ID fact
   set_fact:
-    common_vpc_id: '{{ fetch_vpc_id.stdout | from_json }}'
+    common_vpc_id: "{{ fetch_vpcs_id.vpcs[0].id }}"
