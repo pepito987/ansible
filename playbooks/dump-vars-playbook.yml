@@ -1,0 +1,10 @@
+---
+- name: Dump all variables
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars_files:
+    - ../vars/common/vpc.yml
+
+  roles:
+    - role: dump_vars
