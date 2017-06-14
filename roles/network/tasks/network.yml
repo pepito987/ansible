@@ -1,0 +1,31 @@
+---
+#Input:
+#  network_vpc_name_r: {}
+#  network_vpc_cidr_r: {}
+#  network_vpc_region_r: {}
+#  network_igw_vpc_id_r: {}
+#  network_igw_tag_name_r: {}
+#  network_igw_state_r: {}
+#  network_subnet_vpc_id_r: {}
+#  network_subnet_az_r: {}
+#  network_subnet_cidr_r: {}
+#  network_subnet_name_r: {}
+
+- include: ../../../modules/create/vpc.yml
+  vars:
+    vpc_name_r: "{{ network_vpc_name_r }}"
+    vpc_cidr_r: "{{ network_vpc_cidr_r }}"
+    vpc_region_r: "{{ network_vpc_region_r }}"
+
+- include: ../../../modules/create/igw.yml
+  vars:
+    igw_vpc_id_r: "{{ scope_vpc_id }}"
+    igw_tag_name_r: "{{ network_igw_tag_name_r }}"
+    igw_state_r: "present"
+
+- include: ../../../modules/create/subnet.yml
+  vars:
+    subnet_vpc_id_r: "{{ scope_vpc_id }}"
+    subnet_az_r: "{{ network_subnet_az_r }}"
+    subnet_cidr_r: "{{ network_subnet_cidr_r }}"
+    subnet_name_r: "{{ network_subnet_name_r }}"

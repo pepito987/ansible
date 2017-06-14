@@ -1,0 +1,15 @@
+---
+#Input:
+#  subnet_vpc_id_r: {}
+#  subnet_az_r: {}
+#  subnet_cidr_r: {}
+#  subnet_name_r: {}
+
+- name: Create Subnets
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ subnet_vpc_id_r }}"
+    az: "{{ subnet_az_r }}"
+    cidr: "{{ subnet_cidr_r }}"
+    resource_tags:
+      Name: "{{ subnet_name_r }}"

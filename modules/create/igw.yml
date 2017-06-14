@@ -1,0 +1,24 @@
+---
+#Input:
+#  igw_vpc_id_r: {}
+#  igw_tag_name_r: {}
+#  igw_state_r: {}
+#
+#Output:
+#  scope_igw_id: {}
+
+- name: Create Internet Gateway
+  ec2_vpc_igw:
+    vpc_id: "{{ igw_vpc_id_r }}"
+    state: "{{ igw_state_r }}"
+  register: scope_igw
+
+- name: Retreive Gateway ID
+  set_fact:
+    scope_igw_id: "{{ scope_igw.gateway_id }}"
+
+- name: Tag Internet Gateway
+  ec2_tag:
+    resource: "{{ scope_igw_id }}"
+    tags:
+      Name: "{{ igw_tag_name_r }}"

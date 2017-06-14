@@ -1,0 +1,18 @@
+---
+Input:
+  common_vpc_name_r: {}
+
+Output:
+  common_vpc_id: {}
+  common_vpc_state_r: {}
+
+- name: Fetch VPC ID
+  ec2_vpc_net_facts:
+    filters:
+      "tag:Name": "{{ common_vpc_name_r }}"
+      state: "{{ common_vpc_state_r }}"
+  register: fetch_vpcs_id
+
+- name: Set VPC ID fact
+  set_fact:
+    common_vpc_id: "{{ fetch_vpcs_id.vpcs[0].id }}"
