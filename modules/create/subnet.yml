@@ -4,11 +4,17 @@
 #  subnet_az_r: {}
 #  subnet_cidr_r: {}
 #  subnet_name_r: {}
+#  subnet_vpc_name_r: {}
+
+- include: ../fetch/vpc_id.yml
+  vars:
+    fetch_vpc_name_r: "{{ subnet_vpc_name_r }}"
+    fetch_vpc_state_r: "available"
 
 - name: Create Subnets
   ec2_vpc_subnet:
     state: present
-    vpc_id: "{{ subnet_vpc_id_r }}"
+    vpc_id: "{{ fetch_vpc_id }}"
     az: "{{ subnet_az_r }}"
     cidr: "{{ subnet_cidr_r }}"
     resource_tags:
