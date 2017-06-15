@@ -1,19 +1,15 @@
 ---
 #Input:
-#  igw_vpc_id_r: {}
 #  igw_tag_name_r: {}
-#  igw_state_r: {}
-#  igw_vpc_name_r: {}
 
-- include: ../fetch/vpc_id.yml
+- include: "../fetch/{{ fetch['from'] }}"
   vars:
-    fetch_vpc_name_r: "{{ igw_vpc_name_r }}"
-    fetch_vpc_state_r: "available"
+    fetch_vpc_name_r: "{{ fetch['with']['fetch_vpc_name_r'] }}"
+    fetch_vpc_state_r: "{{ fetch['with']['fetch_vpc_state_r'] }}"
 
 - name: Create Internet Gateway
   ec2_vpc_igw:
     vpc_id: "{{ fetch_vpc_id }}"
-    state: "{{ igw_state_r }}"
   register: scope_igw
 
 - name: Tag Internet Gateway

@@ -3,10 +3,7 @@
 #  network_vpc_name_r: {}
 #  network_vpc_cidr_r: {}
 #  network_vpc_region_r: {}
-#  network_igw_vpc_id_r: {}
 #  network_igw_tag_name_r: {}
-#  network_igw_state_r: {}
-#  network_subnet_vpc_id_r: {}
 #  network_subnet_az_r: {}
 #  network_subnet_cidr_r: {}
 #  network_subnet_name_r: {}
@@ -20,12 +17,19 @@
 - include: ../../../modules/create/igw.yml
   vars:
     igw_tag_name_r: "{{ network_igw_tag_name_r }}"
-    igw_state_r: "present"
-    igw_vpc_name_r: "{{ network_vpc_name_r }}"
+    fetch:
+      from: vpc_id.yml
+      with:
+        fetch_vpc_name_r: "{{ network_vpc_name_r }}"
+        fetch_vpc_state_r: "available"
 
 - include: ../../../modules/create/subnet.yml
   vars:
+    fetch:
+      from: vpc_id.yml
+      with:
+        fetch_vpc_name_r: "{{ network_vpc_name_r }}"
+        fetch_vpc_state_r: "available"
     subnet_az_r: "{{ network_subnet_az_r }}"
     subnet_cidr_r: "{{ network_subnet_cidr_r }}"
     subnet_name_r: "{{ network_subnet_name_r }}"
-    subnet_vpc_name_r: "{{ network_vpc_name_r }}"
