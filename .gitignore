@@ -1,5 +1,5 @@
 .idea/
 .gitignore
-*.retry
 vars/
 venv/
+_*/

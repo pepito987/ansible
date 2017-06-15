@@ -1,0 +1,19 @@
+---
+#Input:
+#  vpc_name_r: {}
+#  vpc_cidr_r: {}
+#  vpc_region_r: {}
+
+- name: Create VPC
+  ec2_vpc_net:
+    name: "{{ vpc_name_r }}"
+    cidr_block: "{{ vpc_cidr_r }}"
+    region: "{{ vpc_region_r }}"
+    state: "present"
+  register: vpc_new
+
+- name: Tag VPC
+  ec2_tag:
+    resource: "{{ vpc_new.vpc.id }}"
+    tags:
+      Name: "{{ vpc_name_r }}"

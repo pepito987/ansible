@@ -1,0 +1,30 @@
+---
+#Input:
+#  subnet_private_az_r: {}
+#  subnet_private_cidr_r: {}
+#  subnet_private_name_r: {}
+#  subnet_private_aws_region_r: {}
+
+- include: "../fetch/{{ fetch['from'] }}"
+  vars:
+    fetch_vpc_name_r: "{{ fetch['with']['fetch_vpc_name_r'] }}"
+    fetch_vpc_state_r: "{{ fetch['with']['fetch_vpc_state_r'] }}"
+
+- name: Create Subnets
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ fetch_vpc_id }}"
+    az: "{{ subnet_private_az_r }}"
+    cidr: "{{ subnet_private_cidr_r }}"
+    resource_tags:
+      Name: "{{ subnet_private_name_r }}"
+  register: scope_private_subnet
+
+- name: Create Private Route Table
+  ec2_vpc_route_table:
+    vpc_id: "{{ fetch_vpc_id }}"
+    region: "{{ subnet_private_aws_region_r }}"
+    tags:
+      Name: "{{ subnet_private_name_r }}"
+    subnets:
+      - "{{ scope_private_subnet.subnet.id }}"
