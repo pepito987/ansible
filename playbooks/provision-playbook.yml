@@ -11,8 +11,14 @@
         network_vpc_name_r: "{{ vpc_name }}" ,
         network_vpc_cidr_r: "{{ vpc_cidr }}",
         network_vpc_region_r: "{{ vpc_region }}" ,
+
         network_igw_tag_name_r: "{{ igw_tag_name }}" ,
-        network_subnet_az_r: "{{ az_west_a }}" ,
-        network_subnet_cidr_r: "{{ subnet_public_cidr }}" ,
-        network_subnet_name_r: "{{ subnet_public_name }}"
+
+        network_subnet_public_az_r: "{{ az_west_a }}" ,
+        network_subnet_public_cidr_r: "{{ subnet_public_cidr }}" ,
+        network_subnet_public_name_r: "{{ subnet_public_name }}",
+
+        network_subnet_private_az_r: "{{ az_west_a }}",
+        network_subnet_private_cidr_r: "{{ subnet_private_cidr }}",
+        network_subnet_private_name_r: "{{ subnet_private_name }}"
       }

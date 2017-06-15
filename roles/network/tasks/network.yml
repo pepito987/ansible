@@ -4,9 +4,13 @@
 #  network_vpc_cidr_r: {}
 #  network_vpc_region_r: {}
 #  network_igw_tag_name_r: {}
-#  network_subnet_az_r: {}
-#  network_subnet_cidr_r: {}
-#  network_subnet_name_r: {}
+#  network_subnet_public_az_r: {}
+#  network_subnet_public_cidr_r: {}
+#  network_subnet_public_name_r: {}
+
+#  network_subnet_private_az_r: {}
+#  network_subnet_private_cidr_r: {}
+#  network_subnet_private_name_r: {}
 
 - include: ../../../modules/create/vpc.yml
   vars:
@@ -14,22 +18,26 @@
     vpc_cidr_r: "{{ network_vpc_cidr_r }}"
     vpc_region_r: "{{ network_vpc_region_r }}"
 
-- include: ../../../modules/create/igw.yml
+- include: ../../../modules/create/subnet_public.yml
   vars:
-    igw_tag_name_r: "{{ network_igw_tag_name_r }}"
     fetch:
       from: vpc_id.yml
       with:
         fetch_vpc_name_r: "{{ network_vpc_name_r }}"
         fetch_vpc_state_r: "available"
+    subnet_public_az_r: "{{ network_subnet_public_az_r }}"
+    subnet_public_cidr_r: "{{ network_subnet_public_cidr_r }}"
+    subnet_public_name_r: "{{ network_subnet_public_name_r }}"
+    subnet_public_igw_tag_name_r: "{{ network_igw_tag_name_r }}"
 
-- include: ../../../modules/create/subnet.yml
+- include: ../../../modules/create/subnet_private.yml
   vars:
     fetch:
       from: vpc_id.yml
       with:
         fetch_vpc_name_r: "{{ network_vpc_name_r }}"
         fetch_vpc_state_r: "available"
-    subnet_az_r: "{{ network_subnet_az_r }}"
-    subnet_cidr_r: "{{ network_subnet_cidr_r }}"
-    subnet_name_r: "{{ network_subnet_name_r }}"
+    subnet_private_az_r: "{{ network_subnet_private_az_r }}"
+    subnet_private_cidr_r: "{{ network_subnet_private_cidr_r }}"
+    subnet_private_name_r: "{{ network_subnet_private_name_r }}"
+    subnet_private_aws_region_r: "{{ network_vpc_region_r }}"
