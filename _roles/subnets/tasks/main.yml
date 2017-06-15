@@ -1,3 +1,0 @@
----
-- include: "{{ subnets_mode_r }}/_includes.yml"
-  static: yes

@@ -1,3 +1,0 @@
----
-- include: "{{ vpc_mode_r }}/_includes.yml"
-  static: yes

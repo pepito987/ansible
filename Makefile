@@ -19,20 +19,20 @@ docker-check:
 provivion: docker-check .dockerignore
 	docker-compose run --rm with make ansible-provision
 
-destroy: docker-check .dockerignore
-	docker-compose run --rm with make ansible-destroy
+#destroy: docker-check .dockerignore
+#	docker-compose run --rm with make ansible-destroy
 
-test-create: docker-check .dockerignore
-	docker-compose run --rm with sh -c "make ansible-dump-vars && bundle exec rake spec\[create\]"
+#test-create: docker-check .dockerignore
+#	docker-compose run --rm with sh -c "make ansible-dump-vars && bundle exec rake spec\[create\]"
 
-test-destroy: docker-check .dockerignore
-	docker-compose run --rm with sh -c "make ansible-dump-vars && bundle exec rake spec\[destroy\]"
+#test-destroy: docker-check .dockerignore
+#	docker-compose run --rm with sh -c "make ansible-dump-vars && bundle exec rake spec\[destroy\]"
 
 ansible-provision:
 	ansible-playbook playbooks/provision-playbook.yml -v
 
-ansible-destroy:
-	ansible-playbook playbooks/destroy-playbook.yml -v
+#ansible-destroy:
+#	ansible-playbook playbooks/destroy-playbook.yml -v
 
-ansible-dump-vars:
-	ansible-playbook -i /dev/null playbooks/dump-vars-playbook.yml -v
+#ansible-dump-vars:
+#	ansible-playbook -i /dev/null playbooks/dump-vars-playbook.yml -v

@@ -1,3 +1,0 @@
----
-- include: destroy/igw.yml
-- include: destroy/vpc.yml

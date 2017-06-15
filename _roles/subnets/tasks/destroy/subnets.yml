@@ -1,7 +1,0 @@
----
-- name: Destroy Subnets
-  ec2_vpc_subnet:
-    state: absent
-    vpc_id: "{{ common_vpc_id }}"
-    cidr: "{{ item.cidr }}"
-  with_items: "{{ subnets_r }}"

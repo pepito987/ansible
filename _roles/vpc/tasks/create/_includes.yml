@@ -1,3 +1,0 @@
----
-- include: create/vpc.yml
-- include: create/igw.yml
